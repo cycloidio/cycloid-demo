@@ -12,3 +12,8 @@ Orig color
 ```
 sed -i 's/38407c/0f9797/g' imgs/main.css
 ```
+
+To generate an error please add this pattern in the index
+```
+ERROR
+```
