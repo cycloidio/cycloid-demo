@@ -16,9 +16,9 @@ git add imgs/main.css
 git commit -m "make a change : $comment"
 
 # Increment version number
-source changelog
+source version
 # We can increment major/minor/patch (0.0.0)
-bumpversion --current-version $version  patch changelog --commit --tag
+bumpversion --current-version $version  patch version --commit --tag
 
 echo "git push"
 git push --tags
