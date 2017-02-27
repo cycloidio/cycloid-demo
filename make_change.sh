@@ -19,7 +19,6 @@ git config --global user.email contact@cycloid.io
 echo "git commit/push"
 git add imgs/main.css
 git commit -m "make a change : $comment"
-git push
 
 # Increment version number
 source version
@@ -27,4 +26,5 @@ source version
 bumpversion --current-version $version  patch version --commit --tag
 
 echo "git push tag"
+git push origin master
 git push origin $version
