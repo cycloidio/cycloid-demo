@@ -26,4 +26,5 @@ source version
 bumpversion --current-version $version  patch version --commit --tag
 
 echo "git push"
+git push
 git push --tags
