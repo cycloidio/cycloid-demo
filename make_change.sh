@@ -24,6 +24,7 @@ git commit -m "make a change : $comment"
 source version
 # We can increment major/minor/patch (0.0.0)
 bumpversion --current-version $version  patch version --commit --tag
+source version
 
 echo "git push tag"
 git push origin master
