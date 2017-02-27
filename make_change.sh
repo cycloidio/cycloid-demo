@@ -3,10 +3,10 @@
 #If orig color
 echo "Make change"
 if [ $(grep 0f9797 ./imgs/main.css -c) = 0 ]; then
-  comment="revert to 0f9797"
+  comment="revert to light blue background"
   sed -i 's/38407c/0f9797/g' imgs/main.css
 else
-  comment="change to 38407c"
+  comment="change to dark blue background"
   sed -i 's/0f9797/38407c/g' imgs/main.css
 fi
 
