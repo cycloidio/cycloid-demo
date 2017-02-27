@@ -27,4 +27,4 @@ bumpversion --current-version $version  patch version --commit --tag
 
 echo "git push tag"
 git push origin master
-git push origin $version
+git push origin v$version
