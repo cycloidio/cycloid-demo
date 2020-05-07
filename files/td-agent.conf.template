@@ -1,0 +1,72 @@
+<source>
+  @type tail
+  path /var/log/apache2/access.log
+  pos_file /var/log/httpd-access.log.pos
+  tag apache.access
+  #format apache2
+  format none
+</source>
+<source>
+  @type tail
+  path /var/log/apache2/error.log
+  pos_file /var/log/httpd-error.log.pos
+  tag apache.error
+  #format apache2
+  format none
+</source>
+
+<filter apache.*>
+  @type record_transformer
+  <record>
+    hostname ${hostname}
+  </record>
+</filter>
+
+<match apache.access>
+  @type copy
+  #<store>
+  #@type file
+  #path /tmp/logs
+  #compress gzip
+  #<buffer>
+  #  timekey 1d
+  #  timekey_use_utc true
+  #  timekey_wait 10m
+  #</buffer>
+  #</store>
+
+  <store>
+  @type stdout
+  </store>
+
+  <store>
+  @type cloudwatch_logs
+  @log_level error
+
+  region $AWS_REGION
+  log_group_name ${PROJECT}_$ENV
+  log_stream_name access
+  auto_create_stream true
+  retention_in_days 30
+  tags {"project": "$PROJECT", "cycloid.io": true, "env": "$ENV"}
+  </store>
+</match>
+
+<match apache.error>
+  @type copy
+  <store>
+  @type stdout
+  </store>
+
+  <store>
+  @type cloudwatch_logs
+  @log_level error
+
+  region $AWS_REGION
+  log_group_name ${PROJECT}_$ENV
+  log_stream_name error
+  auto_create_stream true
+  retention_in_days 30
+  tags {"project": "$PROJECT", "cycloid.io": true, "env": "$ENV"}
+  </store>
+</match>
